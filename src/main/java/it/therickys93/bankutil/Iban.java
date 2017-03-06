@@ -50,11 +50,11 @@ public class Iban {
 	
 	@Override
 	public String toString() {
-		return "Iban={iban="+this.iban+", correct="+this.correct+"}";
+		return "Iban={iban="+this.iban.toUpperCase()+", correct="+this.correct+"}";
 	}
 
 	public String iban() {
-		return this.iban;
+		return this.iban.toUpperCase();
 	}
 
 }

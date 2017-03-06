@@ -44,5 +44,13 @@ public class IbanTest {
 		assertTrue(iban.correct());
 		assertEquals("IT40S0542811101000000123456", iban.iban());
 		assertEquals("Iban={iban=IT40S0542811101000000123456, correct=true}", iban.toString());
-	}	
+	}
+	
+	@Test
+	public void testEight() {
+		Iban iban = Iban.checkIban("it40s0542811101000000123456");
+		assertTrue(iban.correct());
+		assertEquals("IT40S0542811101000000123456", iban.iban());
+		assertEquals("Iban={iban=IT40S0542811101000000123456, correct=true}", iban.toString());
+	}
 }
