@@ -40,10 +40,5 @@ public class IbanTest {
 	public void testSeven() {
 		Iban iban = new Iban();
 		iban.toString();
-	}
-	
-	// IT60X0542811101000000123456
-	// IT43K0310412701000000820420
-	// IT40S0542811101000000123456
-	
+	}	
 }
