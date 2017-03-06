@@ -1,5 +1,7 @@
 # Bank Util
 
+[![Build Status](https://travis-ci.org/therickys93/bankutil.svg?branch=master)](https://travis-ci.org/therickys93/bankutil)
+
 This library is for my personal use. If you want to use it you're welcome!
 
 ## Install using gradle
