@@ -22,7 +22,7 @@ allprojects {
 * Finally in your dependencies add:
 
 ```
-compile 'com.github.therickys93:bankutil:1.0.0'
+compile 'com.github.therickys93:bankutil:1.1.0'
 ```
 
 ## content
@@ -31,5 +31,8 @@ There is only one class: Iban
 This class will check if the Italian Iban that you pass is valid or not
 
 ```
-boolean valid = Iban.checkIban("iban");
+Iban iban = Iban.checkIban("IT40S0542811101000000123456");
+boolean valid = iban.correct();
+String iban = iban.iban();
+iban.toString();   // Iban={iban=IT40S0542811101000000123456, correct=true}
 ```
