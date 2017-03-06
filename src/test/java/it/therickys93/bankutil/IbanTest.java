@@ -32,6 +32,8 @@ public class IbanTest {
 	
 	@Test
 	public void testSix() {
+		assertFalse(Iban.checkIban("IT34K6789101112131415161718"));
+		assertTrue(Iban.checkIban("IT60X0542811101000000123456"));
 		assertTrue(Iban.checkIban("IT43K0310412701000000820420"));
 		assertTrue(Iban.checkIban("IT40S0542811101000000123456"));
 	}

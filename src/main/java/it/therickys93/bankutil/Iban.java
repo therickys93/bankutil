@@ -26,10 +26,8 @@ public class Iban {
 				newIban += c;
 			}
 		}
-		System.out.println(newIban);
 		BigDecimal ibanNumber = new BigDecimal(newIban);
 		BigDecimal remainder = ibanNumber.remainder(BigDecimal.valueOf(97));
-		System.out.println(remainder.intValue());
 		return remainder.intValue() == 1;
 	}
 	
