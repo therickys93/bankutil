@@ -15,6 +15,7 @@ public class Iban {
 		}
 		
 		iban = iban.toUpperCase();
+		iban = iban.substring(4).concat(iban.substring(0, 4));
 		String newIban = "";
 		for(int index = 0; index < iban.length(); index++) {
 			char c = iban.charAt(index);
@@ -25,10 +26,10 @@ public class Iban {
 				newIban += c;
 			}
 		}
-		
+		System.out.println(newIban);
 		BigDecimal ibanNumber = new BigDecimal(newIban);
 		BigDecimal remainder = ibanNumber.remainder(BigDecimal.valueOf(97));
-		
+		System.out.println(remainder.intValue());
 		return remainder.intValue() == 1;
 	}
 	
