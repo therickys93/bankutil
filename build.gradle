@@ -16,11 +16,9 @@ test {
 buildscript {
   repositories { jcenter() }
   dependencies {
-    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
     classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
   }
 }
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'info.solidsoft.pitest'
 
 javadoc {
@@ -55,9 +53,3 @@ dependencies {
 pitest {
     targetClasses = [ "it.therickys93.bankutil.*" ]
 }
-
-shadowJar {
-	archiveName 'bankutil.jar'
-}
-
-shadowJar.mustRunAfter clean

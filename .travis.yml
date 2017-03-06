@@ -1,4 +1,4 @@
 language: java
 jdk: oraclejdk8
 script:
-   - ./gradlew clean check jacocoTestReport shadowJar
+   - ./gradlew clean check jacocoTestReport
