@@ -72,6 +72,15 @@ public class IbanTest {
 	}
 	
 	@Test
+	public void testEleven() {
+		Iban iban = Iban.createIban("IT02D0326802801052879623060");
+		assertEquals("IT02D0326802801052879623060", iban.iban());
+		assertEquals("03268", iban.abi());
+		assertEquals("02801", iban.cab());
+		assertEquals("052879623060", iban.accountNumber());
+	}
+	
+	@Test
 	public void usage() {
 		Iban iban = Iban.createIban("IT02D0326802801052879623060");
 		assertEquals("IT02D0326802801052879623060", iban.iban());

@@ -83,4 +83,16 @@ public class Iban {
 		return this.ibanLength;
 	}
 
+	public String abi() {
+		return this.iban.substring(5, 10);
+	}
+
+	public String cab() {
+		return this.iban.substring(10, 15);
+	}
+
+	public String accountNumber() {
+		return this.iban.substring(15);
+	}
+
 }
