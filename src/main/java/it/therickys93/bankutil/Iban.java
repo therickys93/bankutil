@@ -30,8 +30,8 @@ public class Iban {
 			return new Iban(iban, false, 0, false);
 		}
 		
-		String newIban = StringUtils.replaceCharAtIndex(iban, '0', 2);
-		newIban = StringUtils.replaceCharAtIndex(newIban, '0', 3);
+		String newIban = Utils.replaceCharAtIndex(iban, '0', 2);
+		newIban = Utils.replaceCharAtIndex(newIban, '0', 3);
 		
 		int ibanChecksum = checksum(iban);
 		boolean right = ibanChecksum == 1;
@@ -45,7 +45,7 @@ public class Iban {
 		String newIban = "";
 		for(int index = 0; index < iban.length(); index++) {
 			char c = tempiban.charAt(index);
-			if(isBetween(c)) {
+			if(Utils.numberIsBetween(c, 'A', 'Z')) {
 				int charNewValue = c - 55;
 				newIban += "" + charNewValue;
 			} else {
@@ -57,10 +57,6 @@ public class Iban {
 		return remainder.intValue();
 	}
 	
-	private static boolean isBetween(char c) {
-		return (c >= 'A' && c <= 'Z');
-	}
-
 	public boolean ibanChecksum() {
 		return this.correct;
 	}
