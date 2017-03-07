@@ -17,40 +17,66 @@ public class IbanTest {
 	
 	@Test
 	public void testThree() {
-		assertFalse(Iban.checkIban(null).correct());
+		assertFalse(Iban.createIban(null).ibanChecksum());
 	}
 	
 	@Test
 	public void testFour() {
-		assertFalse(Iban.checkIban("").correct());
+		assertFalse(Iban.createIban("").ibanChecksum());
 	}
 	
 	@Test
 	public void testFive() {
-		assertFalse(Iban.checkIban("IT34673893").correct());
+		assertFalse(Iban.createIban("IT34673893").ibanChecksum());
 	}
 	
 	@Test
 	public void testSix() {
-		assertFalse(Iban.checkIban("IT34K6789101112131415161718").correct());
-		assertTrue(Iban.checkIban("IT60X0542811101000000123456").correct());
-		assertTrue(Iban.checkIban("IT43K0310412701000000820420").correct());
-		assertTrue(Iban.checkIban("IT40S0542811101000000123456").correct());
+		assertFalse(Iban.createIban("IT34K6789101112131415161718").ibanChecksum());
+		assertTrue(Iban.createIban("IT60X0542811101000000123456").ibanChecksum());
+		assertTrue(Iban.createIban("IT43K0310412701000000820420").ibanChecksum());
+		assertTrue(Iban.createIban("IT40S0542811101000000123456").ibanChecksum());
 	}
 		
 	@Test
 	public void testSeven() {
-		Iban iban = Iban.checkIban("IT40S0542811101000000123456");
-		assertTrue(iban.correct());
+		Iban iban = Iban.createIban("IT40S0542811101000000123456");
+		assertTrue(iban.ibanChecksum());
 		assertEquals("IT40S0542811101000000123456", iban.iban());
 		assertEquals("Iban={iban=IT40S0542811101000000123456, correct=true}", iban.toString());
 	}
 	
 	@Test
 	public void testEight() {
-		Iban iban = Iban.checkIban("it40s0542811101000000123456");
-		assertTrue(iban.correct());
+		Iban iban = Iban.createIban("it40s0542811101000000123456");
+		assertTrue(iban.ibanChecksum());
 		assertEquals("IT40S0542811101000000123456", iban.iban());
 		assertEquals("Iban={iban=IT40S0542811101000000123456, correct=true}", iban.toString());
+	}
+	
+	@Test
+	public void testNine() {
+		Iban iban = Iban.createIban("IT43K0310412701000000820420");
+		assertTrue(iban.ibanChecksum());
+		assertEquals("43", iban.getCheckDigits());
+	}
+	
+	@Test
+	public void testTen() {
+		Iban iban = Iban.createIban("IT02D0326802801052879623060");
+		assertTrue(iban.ibanChecksum());
+		assertEquals("IT02D0326802801052879623060", iban.iban());
+		assertEquals("02", iban.getCheckDigits());
+		assertTrue(iban.checkDigitsOK());
+		assertTrue(iban.length());
+	}
+	
+	@Test
+	public void usage() {
+		Iban iban = Iban.createIban("IT02D0326802801052879623060");
+		assertEquals("IT02D0326802801052879623060", iban.iban());
+		assertTrue(iban.length());
+		assertTrue(iban.checkDigitsOK());
+		assertTrue(iban.ibanChecksum());
 	}
 }
