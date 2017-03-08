@@ -103,13 +103,13 @@ public class CreditCardTest {
 	@Test
 	public void testFourteen() {
 		CreditCard card = CreditCard.createCard("1234567890123");
-		assertEquals(cardNotOk(), card.prettyToString());
+		assertEquals(cardNotOk("1234567890123"), card.prettyToString());
 	}
 	
-	private String cardNotOk() {
+	private String cardNotOk(String card) {
 		String response = "";
 		response += "Carta di Credito:\n";
-		response += "n°: 1234567890123\n";
+		response += "n°: "+card+"\n";
 		response += "checksum: ❌\n";
 		response += "tipo: Carta Non Valida";
 		return response;
@@ -122,6 +122,16 @@ public class CreditCardTest {
 		response += "checksum: ✅\n";
 		response += "tipo: Visa";
 		return response;
+	}
+	
+	@Test
+	public void testFifteen() {
+		CreditCard card = CreditCard.createCard("ciao");
+		assertEquals("ciao", card.number());
+		assertFalse(card.ok());
+		assertEquals("Carta Non Valida", card.type());
+		assertEquals("CreditCard={number=ciao, correct=false, type=Carta Non Valida}", card.toString());
+		assertEquals(cardNotOk("ciao"), card.prettyToString());
 	}
 	
 	@Test

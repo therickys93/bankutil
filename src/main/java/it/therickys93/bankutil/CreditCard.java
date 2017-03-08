@@ -31,7 +31,6 @@ public class CreditCard {
 			return new CreditCard(number, false, INVALID);
 		}
 		
-		
 		boolean check = check(number);
 		if(check) {
 			if(isMasterCard(number)){
@@ -48,22 +47,35 @@ public class CreditCard {
 		return new CreditCard(number, false, INVALID);
 	}
 	
-	public static boolean check(String number){
-		int sum = 0;
-		boolean alternate = false;
-		for(int index = number.length() - 1; index >= 0; index--){
-			int n = Integer.parseInt(number.substring(index, index + 1));
-			if(alternate){
-				n *= 2;
-				if(n > 9){
-					n = (n % 10) + 1;
-				}
-			}
-			alternate = !alternate;
-			sum += n;
+	private static boolean isNumber(String number){
+		try {
+			Long.parseLong(number);
+			return true;
+		} catch(NumberFormatException e){
+			return false;
 		}
-		
-		return (sum % 10) == 0;
+	}
+	
+	public static boolean check(String number){
+		if(isNumber(number)) {
+			int sum = 0;
+			boolean alternate = false;
+			for(int index = number.length() - 1; index >= 0; index--){
+				int n = Integer.parseInt(number.substring(index, index + 1));
+				if(alternate){
+					n *= 2;
+					if(n > 9){
+						n = (n % 10) + 1;
+					}
+				}
+				alternate = !alternate;
+				sum += n;
+			}
+			
+			return (sum % 10) == 0;
+		} else {
+			return false;
+		}
 	}
 
 	public String number() {
@@ -95,14 +107,22 @@ public class CreditCard {
 	}
 
 	public static boolean isMasterCard(String number) {
-		int n = Integer.parseInt(number.substring(0, 2));
-		boolean master = Utils.numberIsBetween(n, 51, 55);
-		return (number.length() == MASTER_CARD_LENGTH) && master;
+		if(isNumber(number)) {
+			int n = Integer.parseInt(number.substring(0, 2));
+			boolean master = Utils.numberIsBetween(n, 51, 55);
+			return (number.length() == MASTER_CARD_LENGTH) && master;
+		} else {
+			return false;
+		}
 	}
 
 	public static boolean isAmericanExpress(String number) {
-		int n = Integer.parseInt(number.substring(0, 2));
-		return (number.length() == AMERICAN_EXPRESS_LENGTH) && (n == 34 || n == 37);
+		if(isNumber(number)) {
+			int n = Integer.parseInt(number.substring(0, 2));
+			return (number.length() == AMERICAN_EXPRESS_LENGTH) && (n == 34 || n == 37);
+		} else {
+			return false;
+		}
 	}
 
 	public static boolean isVisa13(String number) {
@@ -114,8 +134,12 @@ public class CreditCard {
 	}
 	
 	private static boolean isVisa(String number, int length){
-		int n = Integer.parseInt(number.substring(0, 1));
-		return (number.length() == length) && (n == 4);
+		if(isNumber(number)){
+			int n = Integer.parseInt(number.substring(0, 1));
+			return (number.length() == length) && (n == 4);
+		} else {
+			return false;
+		}
 	}
 
 }

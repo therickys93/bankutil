@@ -46,4 +46,13 @@ public class CreditCardCheckTest {
 		assertTrue(CreditCard.isVisa16("4123456789012345"));
 	}
 	
+	@Test
+	public void testSeven() {
+		assertFalse(CreditCard.check("ciao"));
+		assertFalse(CreditCard.isAmericanExpress("ciao"));
+		assertFalse(CreditCard.isMasterCard("ciao"));
+		assertFalse(CreditCard.isVisa13("ciao"));
+		assertFalse(CreditCard.isVisa16("ciao"));
+	}
+	
 }
