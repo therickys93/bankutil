@@ -34,13 +34,13 @@ public class CreditCard {
 		
 		boolean check = check(number);
 		if(check) {
-			if(length == MASTER_CARD_LENGTH && (number.charAt(0) == '5') && Utils.numberIsBetween(Integer.parseInt(number.substring(1, 2)), 1, 5)){
+			if(isMasterCard(number)){
 				return new CreditCard(number, true, MASTER_CARD);
-			} else if(length == VISA_LENGTH_16 && (number.charAt(0) == '4')) {
+			} else if(isVisa16(number)) {
 				return new CreditCard(number, true, VISA);
-			} else if(length == VISA_LENGTH_13 && (number.charAt(0) == '4')){
+			} else if(isVisa13(number)){
 				return new CreditCard(number, true, VISA);
-			} else if(length == AMERICAN_EXPRESS_LENGTH && (number.charAt(0) == '3') && ((number.charAt(1) == '4') || (number.charAt(1) == '7'))) {
+			} else if(isAmericanExpress(number)) {
 				return new CreditCard(number, true, AMERICAN_EXPRESS);
 			}
 			return new CreditCard(number, true, NOT_SUPPORTED_YET);
@@ -48,7 +48,7 @@ public class CreditCard {
 		return new CreditCard(number, false, INVALID);
 	}
 	
-	private static boolean check(String number){
+	public static boolean check(String number){
 		int sum = 0;
 		boolean alternate = false;
 		for(int index = number.length() - 1; index >= 0; index--){
@@ -92,6 +92,30 @@ public class CreditCard {
 		response += "checksum: " + Utils.getEmoji(this.valid) + "\n";
 		response += "tipo: " + this.type;
 		return response;
+	}
+
+	public static boolean isMasterCard(String number) {
+		int n = Integer.parseInt(number.substring(0, 2));
+		boolean master = Utils.numberIsBetween(n, 51, 55);
+		return (number.length() == MASTER_CARD_LENGTH) && master;
+	}
+
+	public static boolean isAmericanExpress(String number) {
+		int n = Integer.parseInt(number.substring(0, 2));
+		return (number.length() == AMERICAN_EXPRESS_LENGTH) && (n == 34 || n == 37);
+	}
+
+	public static boolean isVisa13(String number) {
+		return isVisa(number, VISA_LENGTH_13);
+	}
+
+	public static boolean isVisa16(String number) {
+		return isVisa(number, VISA_LENGTH_16);
+	}
+	
+	private static boolean isVisa(String number, int length){
+		int n = Integer.parseInt(number.substring(0, 1));
+		return (number.length() == length) && (n == 4);
 	}
 
 }
