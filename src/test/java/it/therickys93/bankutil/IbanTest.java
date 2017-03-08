@@ -81,6 +81,38 @@ public class IbanTest {
 	}
 	
 	@Test
+	public void testTwelve() {
+		Iban iban = Iban.createIban("IT02D0326802801052879623060");
+		assertEquals(ibanOk(), iban.prettyToString());
+	}
+	
+	@Test
+	public void testThirteen() {
+		Iban iban = Iban.createIban("IT34K6789101112131415161718");
+		assertEquals(ibanNotOk(), iban.prettyToString());
+	}
+	
+	private String ibanNotOk() {
+		String response = "";
+		response += "IBAN:\n";
+		response += "n°: IT34K6789101112131415161718\n";
+		response += "lunghezza: ✅\n";
+		response += "n° controllo: ❌\n";
+		response += "checksum: ❌";
+		return response;
+	}
+	
+	private String ibanOk() {
+		String response = "";
+		response += "IBAN:\n";
+		response += "n°: IT02D0326802801052879623060\n";
+		response += "lunghezza: ✅\n";
+		response += "n° controllo: ✅\n";
+		response += "checksum: ✅";
+		return response;
+	}
+	
+	@Test
 	public void usage() {
 		Iban iban = Iban.createIban("IT02D0326802801052879623060");
 		assertEquals("IT02D0326802801052879623060", iban.iban());

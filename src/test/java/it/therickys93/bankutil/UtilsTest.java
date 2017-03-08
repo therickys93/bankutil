@@ -33,6 +33,12 @@ public class UtilsTest {
 	}
 	
 	@Test
+	public void testFive() {
+		assertEquals("✅", Utils.getEmoji(true));
+		assertEquals("❌", Utils.getEmoji(false));
+	}
+	
+	@Test
 	public void testImproveCodeCoverage() {
 		Utils utils = new Utils();
 		utils.toString();

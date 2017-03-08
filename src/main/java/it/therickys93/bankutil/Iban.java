@@ -100,4 +100,14 @@ public class Iban {
 		return this.iban.substring(START_INDEX_ACCOUNT_NUMBER);
 	}
 
+	public String prettyToString() {
+		String response = "";
+		response += "IBAN:\n";
+		response += "n°: " + this.iban() + "\n";
+		response += "lunghezza: " + Utils.getEmoji(this.length()) + "\n";
+		response += "n° controllo: " + Utils.getEmoji(this.checkDigitsOK()) + "\n";
+		response += "checksum: " + Utils.getEmoji(this.checkDigitsOK());
+		return response;
+	}
+
 }
