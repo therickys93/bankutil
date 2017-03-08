@@ -4,6 +4,13 @@ import java.math.BigDecimal;
 
 public class Iban {
 
+	private static final int START_INDEX_ACCOUNT_NUMBER = 15;
+	private static final int START_INDEX_OF_CAB = 10;
+	private static final int START_INDEX_OF_ABI = 5;
+	private static final int SHIFT_VALUE_FOR_LETTERS = 55;
+	public static final int ITALY_IBAN_LENGTH = 27;
+	public static final int INDEX_CHECK_DIGIT_ONE = 2;
+	public static final int INDEX_CHECK_DIGIT_TWO = 3;
 	private String iban;
 	private boolean correct;
 	private String checkDigits;
@@ -19,19 +26,17 @@ public class Iban {
 		}
 		this.ibanLength = ibanLength;
 	}
-	
-	public static final int ITALY_IBAN_LENGTH = 27;
-
+		
 	public static Iban createIban(String iban) {
 		if(iban == null){
 			return new Iban(iban, false, 0, false);
 		}
-		if(iban.length() != 27) {
+		if(iban.length() != ITALY_IBAN_LENGTH) {
 			return new Iban(iban, false, 0, false);
 		}
 		
-		String newIban = Utils.replaceCharAtIndex(iban, '0', 2);
-		newIban = Utils.replaceCharAtIndex(newIban, '0', 3);
+		String newIban = Utils.replaceCharAtIndex(iban, '0', INDEX_CHECK_DIGIT_ONE);
+		newIban = Utils.replaceCharAtIndex(newIban, '0', INDEX_CHECK_DIGIT_TWO);
 		
 		int ibanChecksum = checksum(iban);
 		boolean right = ibanChecksum == 1;
@@ -46,7 +51,7 @@ public class Iban {
 		for(int index = 0; index < iban.length(); index++) {
 			char c = tempiban.charAt(index);
 			if(Utils.numberIsBetween(c, 'A', 'Z')) {
-				int charNewValue = c - 55;
+				int charNewValue = c - SHIFT_VALUE_FOR_LETTERS;
 				newIban += "" + charNewValue;
 			} else {
 				newIban += c;
@@ -75,7 +80,7 @@ public class Iban {
 	}
 
 	public boolean checkDigitsOK() {
-		String digits = "" + this.iban.charAt(2) + this.iban.charAt(3);
+		String digits = "" + this.iban.charAt(INDEX_CHECK_DIGIT_ONE) + this.iban.charAt(INDEX_CHECK_DIGIT_TWO);
 		return ((""+checkDigits).equals(digits));
 	}
 
@@ -84,15 +89,15 @@ public class Iban {
 	}
 
 	public String abi() {
-		return this.iban.substring(5, 10);
+		return this.iban.substring(START_INDEX_OF_ABI, START_INDEX_OF_CAB);
 	}
 
 	public String cab() {
-		return this.iban.substring(10, 15);
+		return this.iban.substring(START_INDEX_OF_CAB, START_INDEX_ACCOUNT_NUMBER);
 	}
 
 	public String accountNumber() {
-		return this.iban.substring(15);
+		return this.iban.substring(START_INDEX_ACCOUNT_NUMBER);
 	}
 
 }
