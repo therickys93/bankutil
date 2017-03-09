@@ -1,5 +1,10 @@
 package it.therickys93.bankutil;
 
+/**
+ * This class operates with the Credit Card numbers ( only Visa, MasterCard and American Express works )
+ * @author therickys93
+ *
+ */
 public class CreditCard {
 
 	private static final String NOT_SUPPORTED_YET = "Non Ancora Supportata";
@@ -21,6 +26,11 @@ public class CreditCard {
 		this.type = type;
 	}
 	
+	/**
+	 * This function creates a CreditCard instance for the number given as parameter
+	 * @param number the number of the credit card given
+	 * @return a new CreditCard object
+	 */
 	public static CreditCard createCard(String number) {
 		if(number == null || number.isEmpty()) {
 			return new CreditCard("", false, INVALID);
@@ -56,6 +66,11 @@ public class CreditCard {
 		}
 	}
 	
+	/**
+	 * This functions use the Luhm algorithm to verify if the number is valid
+	 * @param number the number of the credit card
+	 * @return true if ok, false otherwise
+	 */
 	public static boolean check(String number){
 		if(isNumber(number)) {
 			int sum = 0;
@@ -78,18 +93,34 @@ public class CreditCard {
 		}
 	}
 
+	/**
+	 * This function returns the credit card number given
+	 * @return the credit card number
+	 */
 	public String number() {
 		return this.number;
 	}
 
+	/**
+	 * This function returns if the credit card is valid or not
+	 * @return true if valid, false if not
+	 */
 	public boolean ok() {
 		return this.valid;
 	}
 
+	/**
+	 * This function returns the credit card type: Visa, MasterCard or American Express
+	 * @return the credit card type
+	 */
 	public String type() {
 		return this.type;
 	}
 	
+	/**
+	 * This function returns the string representation of the CreditCard
+	 * @return the string representation of a CreditCard
+	 */
 	@Override
 	public String toString() {
 		String response = "";
@@ -97,6 +128,10 @@ public class CreditCard {
 		return response;
 	}
 
+	/**
+	 * This function returns a pretty version of the toString ( written in Italian )
+	 * @return the pretty string representation of the response
+	 */
 	public String prettyToString() {
 		String response = "";
 		response += "Carta di Credito:\n";
@@ -106,6 +141,11 @@ public class CreditCard {
 		return response;
 	}
 
+	/**
+	 * This function returns if the credit card could be a MasterCard
+	 * @param number the number of the credit card
+	 * @return true if ok, false if not
+	 */
 	public static boolean isMasterCard(String number) {
 		if(isNumber(number)) {
 			int n = Integer.parseInt(number.substring(0, 2));
@@ -116,6 +156,11 @@ public class CreditCard {
 		}
 	}
 
+	/**
+	 * This function returns if the credit card could be an American Express
+	 * @param number the number of the credit card
+	 * @return true if ok, false if not
+	 */
 	public static boolean isAmericanExpress(String number) {
 		if(isNumber(number)) {
 			int n = Integer.parseInt(number.substring(0, 2));
@@ -124,11 +169,21 @@ public class CreditCard {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * This function returns if the credit card could be a Visa 13 digits
+	 * @param number the number of the credit card
+	 * @return true if ok, false if not
+	 */
 	public static boolean isVisa13(String number) {
 		return isVisa(number, VISA_LENGTH_13);
 	}
 
+	/**
+	 * This function returns if the credit card could be a Visa 16 digits
+	 * @param number the number of the credit card
+	 * @return true if ok, false if not
+	 */
 	public static boolean isVisa16(String number) {
 		return isVisa(number, VISA_LENGTH_16);
 	}
