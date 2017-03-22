@@ -159,7 +159,7 @@ public class Iban {
 		response += "n°: " + this.iban() + "\n";
 		response += "lunghezza: " + Utils.getEmoji(this.length()) + "\n";
 		response += "n° controllo: " + Utils.getEmoji(this.checkDigitsOK()) + "\n";
-		response += "checksum: " + Utils.getEmoji(this.checkDigitsOK());
+		response += "checksum: " + Utils.getEmoji(this.ibanChecksum());
 		return response;
 	}
 
