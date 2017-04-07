@@ -63,26 +63,26 @@ public class IbanTest {
 	
 	@Test
 	public void testTen() {
-		Iban iban = Iban.createIban("IT02D0326802801052879623060");
+		Iban iban = Iban.createIban("IT40S0542811101000000123456");
 		assertTrue(iban.ibanChecksum());
-		assertEquals("IT02D0326802801052879623060", iban.iban());
-		assertEquals("02", iban.getCheckDigits());
+		assertEquals("IT40S0542811101000000123456", iban.iban());
+		assertEquals("40", iban.getCheckDigits());
 		assertTrue(iban.checkDigitsOK());
 		assertTrue(iban.length());
 	}
 	
 	@Test
 	public void testEleven() {
-		Iban iban = Iban.createIban("IT02D0326802801052879623060");
-		assertEquals("IT02D0326802801052879623060", iban.iban());
-		assertEquals("03268", iban.abi());
-		assertEquals("02801", iban.cab());
-		assertEquals("052879623060", iban.accountNumber());
+		Iban iban = Iban.createIban("IT40S0542811101000000123456");
+		assertEquals("IT40S0542811101000000123456", iban.iban());
+		assertEquals("05428", iban.abi());
+		assertEquals("11101", iban.cab());
+		assertEquals("000000123456", iban.accountNumber());
 	}
 	
 	@Test
 	public void testTwelve() {
-		Iban iban = Iban.createIban("IT02D0326802801052879623060");
+		Iban iban = Iban.createIban("IT40S0542811101000000123456");
 		assertEquals(ibanOk(), iban.prettyToString());
 	}
 	
@@ -105,7 +105,7 @@ public class IbanTest {
 	private String ibanOk() {
 		String response = "";
 		response += "IBAN:\n";
-		response += "n°: IT02D0326802801052879623060\n";
+		response += "n°: IT40S0542811101000000123456\n";
 		response += "lunghezza: ✅\n";
 		response += "n° controllo: ✅\n";
 		response += "checksum: ✅";
@@ -114,8 +114,8 @@ public class IbanTest {
 	
 	@Test
 	public void usage() {
-		Iban iban = Iban.createIban("IT02D0326802801052879623060");
-		assertEquals("IT02D0326802801052879623060", iban.iban());
+		Iban iban = Iban.createIban("IT40S0542811101000000123456");
+		assertEquals("IT40S0542811101000000123456", iban.iban());
 		assertTrue(iban.length());
 		assertTrue(iban.checkDigitsOK());
 		assertTrue(iban.ibanChecksum());
