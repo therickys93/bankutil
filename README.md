@@ -22,7 +22,7 @@ allprojects {
 * Finally in your dependencies add:
 
 ```
-compile 'com.github.therickys93:bankutil:1.2.1'
+compile 'com.github.therickys93:bankutil:1.2.2'
 ```
 
 ## content
